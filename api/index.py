@@ -54,7 +54,7 @@ class handler(BaseHTTPRequestHandler):
                 params=params
             )
             
-            execution_duration = (time.time() - start_time) * 1000
+            #execution_duration = (time.time() - start_time) * 1000
             # Send response back to the original client
             self.send_response(200)
             self.send_header('Content-Type', 'application/json')
@@ -69,21 +69,21 @@ class handler(BaseHTTPRequestHandler):
                 "forward_response": response.json()  # Include this if you want to return the forwarded API's response
             }
             self.wfile.write(json.dumps(response_data).encode())
-            log_message = (
-                f"Execution Duration: {execution_duration}ms\n"
-                f"Response Content: {response_data}\n"
-                "-------------------------------------------\n"
-            )
-            headers2 = {
-                'Accept': 'application/json',
-                'Content-Type':'application/json'
-                # Add any other required headers here
-            }
-            response = requests.post(
-                    os.getenv('SPREADSHEET'),
-                    json=log_message,
-                    headers=headers2
-                )
+            # log_message = (
+            #     f"Execution Duration: {execution_duration}ms\n"
+            #     f"Response Content: {response_data}\n"
+            #     "-------------------------------------------\n"
+            # )
+            # headers2 = {
+            #     'Accept': 'application/json',
+            #     'Content-Type':'application/json'
+            #     # Add any other required headers here
+            # }
+            # response = requests.post(
+            #         os.getenv('SPREADSHEET'),
+            #         json=log_message,
+            #         headers=headers2
+            #     )
             
             
         except Exception as e:
