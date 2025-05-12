@@ -50,7 +50,12 @@ class handler(BaseHTTPRequestHandler):
                "chat_id": f"{os.getenv('CHAT_ID')}",
                "text": textContent
             }
-            
+            forward_url_n8n= os.getenv('N8N_API')
+            message_n8n = {"body":textContent}
+            response_n8n = requests.post(
+                forward_url_n8n,
+                params=message_n8n
+            )
             response = requests.post(
                 forward_url,
                 params=params
